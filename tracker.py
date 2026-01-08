@@ -1,8 +1,7 @@
 import socket
 import threading
 
-# Configuración del Tracker
-TRACKER_IP = "0.0.0.0"  # Escuchar en todas las interfaces
+TRACKER_IP = "0.0.0.0"  
 TRACKER_PORT = 12345
 nodos = {}  # Diccionario para almacenar nodos y sus datos: {IP: {puerto, archivos, estado}}
 
@@ -96,3 +95,4 @@ def iniciar_tracker():
 
 if __name__ == "__main__":
     iniciar_tracker()
+
