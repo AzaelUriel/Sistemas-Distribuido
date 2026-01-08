@@ -3,7 +3,7 @@ import threading
 import os
 from tqdm import tqdm
 
-# ================= CONFIGURACIÓN =================
+
 TRACKER_IP = "10.86.28.226"
 TRACKER_PORT = 12345
 
@@ -18,7 +18,7 @@ ARCHIVOS_DISPONIBLES = [
     "file4.png", "file5.txt", "file6.mp4"
 ]
 
-# ================= TRACKER =================
+
 def registrar_nodo():
     with socket.socket() as s:
         s.connect((TRACKER_IP, TRACKER_PORT))
@@ -32,7 +32,7 @@ def solicitar_peers(archivo):
         respuesta = s.recv(1024).decode()
         return respuesta.replace("PEERS:", "").split(";")
 
-# ================= DESCARGA =================
+
 def descargar_archivo(archivo):
     peers = solicitar_peers(archivo)
 
@@ -61,7 +61,7 @@ def descargar_archivo(archivo):
 
     print(f"✅ {archivo} descargado")
 
-# ================= SERVIDOR =================
+
 def manejar_peticion(conexion):
     try:
         mensaje = conexion.recv(1024).decode()
@@ -90,7 +90,7 @@ def iniciar_servidor():
         c, _ = s.accept()
         threading.Thread(target=manejar_peticion, args=(c,), daemon=True).start()
 
-# ================= MENÚ =================
+
 def menu():
     while True:
         print("\n===== MENÚ NODO B =====")
@@ -112,7 +112,7 @@ def menu():
         else:
             print("Opción inválida")
 
-# ================= MAIN =================
+
 if __name__ == "__main__":
     registrar_nodo()
     threading.Thread(target=iniciar_servidor, daemon=True).start()
